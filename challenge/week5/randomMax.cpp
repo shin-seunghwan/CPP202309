@@ -26,10 +26,11 @@ int main() {
 		int j = 0; // 변수 선언 및 for 구문 작성
 		for (auto value: numlist[i]){ //범위 기반 배열 준비 $$
 			// numlist[i]에 해당하는 배열의 한칸을 value에 넣어준다
-			if (max < value);
-			max = value;
-			maxI = i;
-			maxJ = j;
+			if (max < value) {
+				max = value;
+				maxI = i;
+				maxJ = j;
+			}
 		}
 		j++; //j가 한칸한칸씩 증가하도록 해줌
 		
