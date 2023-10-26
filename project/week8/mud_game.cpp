@@ -10,6 +10,8 @@ const int mapY = 5;
 bool checkXY(int user_x, int mapX, int user_y, int mapY);
 void displayMap(int map[][mapX], int user_x, int user_y);
 bool checkGoal(int map[][mapX], int user_x, int user_y);
+void checkState(int map[][mapX], int user_x, int user_y);
+
 
 int userHP = 20;
 
@@ -31,7 +33,7 @@ int main() {
 
 		// 사용자의 입력을 저장할 변수 선언
 		string user_input = "";
-		cout << "명령어를 입력하세요 (상,하,좌,우,지도,종료): ";
+		cout << "현재 HP: " << userHP << "  명령어를 입력하세요 (상,하,좌,우,지도,종료): ";
 		cin >> user_input;
 
 		if (user_input == "상") {
@@ -106,12 +108,22 @@ int main() {
 			cout << "잘못된 입력입니다." << endl;
 			continue;
 		}
+		// 사용자의 위치 정보 체크
+		checkState(map, user_x, user_y);
+
 
 		// 목적지에 도달했는지 체크
 		//finish를 논리형으로 선언, checkGoal 가 true 이면 아랫 문장 출력
 		bool finish = checkGoal(map, user_x, user_y);
 		if (finish == true) {
 			cout << "목적지에 도착했습니다! 축하합니다!" << endl;
+			cout << "게임을 종료합니다." << endl;
+			break;
+		}
+
+		// 사용자의 HP 체크
+		if (userHP <= 0) {
+			cout << "HP가 0 이하가 되었습니다. 실패했습니다. " << endl;
 			cout << "게임을 종료합니다." << endl;
 			break;
 		}
@@ -173,25 +185,21 @@ bool checkGoal(int map[][mapX], int user_x, int user_y) {
 	return false;
 }
 
+// 0은 빈 공간, 1은 아이템, 2는 적, 3은 포션, 4는 목적지
+void checkState(int map[][mapX], int user_x, int user_y) {
 
-int user_x = 0;
-int user_y = 0;
+	switch (map[user_y][user_x]) {
+	case 1:
+		cout << "아이템이 있습니다" << endl;
+		break;
+	case 2:
+		cout << "적이 있습니다. HP가 2 줄어듭니다." << endl;
+		userHP -= 2;
+		break;
+	case 3:
+		cout << "포션이 있습니다. HP가 2 늘어납니다." << endl;
 
-int now_HP() {
-	if (user_x += 1) {
-		userHP = userHP - 1;
+		userHP += 2;
+		break;
 	}
-	else if (user_x -= 1) {
-		userHP = userHP - 1;
-	}
-	else if (user_y += 1) {
-		userHP = userHP - 1;
-	}
-	else if (user_y -= 1) {
-		userHP = userHP - 1;
-	}
-	else
-		userHP;
-	
-return userHP;
 }
