@@ -1,12 +1,13 @@
 #include <iostream>
 using namespace std;
 
+//상수 및 변수 선언
 const int NUM_USERS = 3;
 const int NUM_ITEMS = 3;
 int userPreferences[NUM_USERS][NUM_ITEMS];
 
 
-
+//이중 반복문과 2차 배열을 이용해 함수 선언
 void initializePreferences(int userPreferences[NUM_USERS][NUM_ITEMS]) {
 	for (int i = 0; i < NUM_USERS; ++i) {
 		cout << "사용자 " << (i + 1) << "의 선호도를 입력하세요 (";
@@ -15,9 +16,10 @@ void initializePreferences(int userPreferences[NUM_USERS][NUM_ITEMS]) {
 			cin >> userPreferences[i][j];
 		}
 	}
-	
+
 }
 
+//2차배열 이중 반복문 2중 조건문을 이용해 함수 선언
 void  findRecommendedItems(const int userPreferences[NUM_USERS][NUM_ITEMS]) {
 	for (int i = 0; i < NUM_USERS; ++i) {
 		int maxPreferenceIndex = 0;
@@ -39,9 +41,9 @@ void  findRecommendedItems(const int userPreferences[NUM_USERS][NUM_ITEMS]) {
 
 int main() {
 
+	// 함수 출력
 	initializePreferences(userPreferences);
 	findRecommendedItems(userPreferences);
 
 	return 0;
 }
-
